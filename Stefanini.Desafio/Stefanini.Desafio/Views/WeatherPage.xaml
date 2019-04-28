@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Stefanini.Desafio.ViewModels"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             x:Class="Stefanini.Desafio.Views.WeatherPage"
+              Title="{Binding Title}"
+             x:Name="BrowseWeatherPage">
+
+    <ContentPage.BindingContext>
+        <local:WeatherViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Label Text="Selecione a Cidade" FontSize="20" TextColor="DimGray" Margin="20,0" />
+        <ListView 
+             x:Name="ListViewWithCustomCells"
+             ItemSelected="OnItemSelected"
+            ItemsSource="{Binding Items}" CachingStrategy="RecycleElement" HasUnevenRows="True">
+            <ListView.Behaviors>
+                <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+
+                        </ViewCell.ContextActions>
+                        <ViewCell.View>
+                            <Grid
+                            x:Name="ListViewGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                    Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                    Height="*" />
+                                    <RowDefinition
+                                    Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <StackLayout
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="2">
+                                    <Label
+                                    Text="{Binding Title}"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                    <!-- set the footer to have a zero height when invisible -->
+                    <Grid.Triggers>
+                        <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                            <Setter Property="HeightRequest" Value="0" />
+                        </Trigger>
+                    </Grid.Triggers>
+                    <!-- the loading content -->
+                    <Label Text="Loading..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Grid>
+            </ListView.Footer>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

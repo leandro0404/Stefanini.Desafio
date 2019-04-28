@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stefanini.Desafio.Views.WeatherDetailPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Small" />
+                <Setter Property="TextColor" 
+                        Value="Gray" />
+            </Style>
+
+            <Style x:Key="labelResultStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Medium" />
+                <Setter Property="Margin" 
+                        Value="10,0,0,0" />
+            </Style>
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10">
+        <Label Text="Location" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Title}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+        <Label Text="Temperature" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Item.Main.Temperature}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+        <Label Text="Wind Speed" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Item.Wind.Speed}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+        <Label Text="Humidity" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Item.Main.Humidity}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+        <Label Text="Visibility" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Item.Weather[0].Visibility}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+        <Label Text="Description" 
+                       Style="{StaticResource labelStyle}" />
+        <Label Text="{Binding Item.Weather[0].Description}" 
+                       Style="{StaticResource labelResultStyle}" />
+
+
+        <Button Text="Add Favoritos" Clicked="Button_Clicked" BindingContext="Item">
+           
+        </Button>
+
+    </StackLayout>
+
+</ContentPage>
